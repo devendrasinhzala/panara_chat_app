@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "793940233052",
+    "firebase_url": "https://panara-chat-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "panara-chat-app",
+    "storage_bucket": "panara-chat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793940233052:android:8a4044eff894acda4d0f99",
+        "android_client_info": {
+          "package_name": "com.panara.chat.chat_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdKlX0qtne1rvsCc5npOz7-3W8G3oEoFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
