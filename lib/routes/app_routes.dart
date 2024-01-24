@@ -1,3 +1,6 @@
+import 'package:chat_application/modules/chat/logic/binding/chat_binding.dart';
+import 'package:chat_application/modules/chat/view/chat_screen.dart';
+import 'package:chat_application/modules/landing/logic/binding/landing_binding.dart';
 import 'package:chat_application/modules/landing/view/landing_screen.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +13,7 @@ class AppRoutes {
   static String login = '/login';
   static String signUp = '/sign_up';
   static String landing = '/landing';
+  static String chat = '/chat';
 
   static final getPages = [
     GetPage(
@@ -25,6 +29,12 @@ class AppRoutes {
     GetPage(
       name: landing,
       page: () => const LandingScreen(),
+      binding: LandingBinding(),
+    ),
+    GetPage(
+      name: chat,
+      page: () => const ChatScreen(),
+      binding: ChatBinding(),
     ),
   ];
 }

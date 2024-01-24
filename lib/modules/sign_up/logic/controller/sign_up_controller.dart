@@ -1,3 +1,5 @@
+import 'package:chat_application/api/api_endpoints.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,15 +12,24 @@ class SignUpController extends GetxController {
   TextEditingController passwodController = TextEditingController();
   RxBool hidePassword = true.obs;
   RxBool hideConfirmPassword = true.obs;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //Sign Up Method
   Future<void> signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwodController.text,
       );
-      if (FirebaseAuth.instance.currentUser?.email?.isNotEmpty == true) {
+      if (_auth.currentUser?.email?.isNotEmpty == true) {
+        Map<String, dynamic> data = {
+          'email': emailController.text,
+          'status': 'ofline',
+        };
+        await FirebaseFirestore.instance
+            .collection(ApiEnpoints.users)
+            .doc(_auth.currentUser?.uid)
+            .set(data);
         Get.offAllNamed(
           AppRoutes.landing,
         );

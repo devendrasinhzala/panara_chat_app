@@ -42,12 +42,9 @@ class LoginScreen extends GetView<LoginController> {
                   controller: controller.emailController,
                   hintText: Strings.email,
                   validator: (value) {
-                    final bool emailValid = RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                    ).hasMatch(value ?? '');
                     if (value?.trim().isEmpty == true) {
                       return 'Please enter email';
-                    } else if (!emailValid) {
+                    } else if (value?.isEmail != true) {
                       return 'Please enter valid email';
                     }
                     return null;

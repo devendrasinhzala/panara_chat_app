@@ -13,6 +13,7 @@ class AppTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.focusNode,
     this.validator,
+    this.onChanged,
   }) : super(key: key);
 
   final TextEditingController? controller;
@@ -21,6 +22,7 @@ class AppTextFormField extends StatefulWidget {
   final bool obscureText;
   final FocusNode? focusNode;
   final FormFieldValidator<String>? validator;
+  final Function(String value)? onChanged;
 
   @override
   State<AppTextFormField> createState() => _AppTextFormFieldState();
@@ -39,6 +41,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       obscureText: widget.obscureText,
       obscuringCharacter: '\u2022',
       validator: widget.validator,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: AppTextStyle.textMediumSF.copyWith(
