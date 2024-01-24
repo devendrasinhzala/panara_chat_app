@@ -14,4 +14,7 @@ class Strings {
   static const String signUp = 'Sign Up';
   static const String confirmPassword = 'Confirm Password';
   static const String alreadyHaveAnAccount = 'Already have an account? ';
+
+  //Landing
+  static const String chat = 'Chat';
 }

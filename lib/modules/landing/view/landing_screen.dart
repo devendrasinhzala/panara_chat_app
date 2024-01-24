@@ -1,8 +1,15 @@
 import 'package:chat_application/modules/landing/logic/controller/landing_controller.dart';
 import 'package:chat_application/modules/landing/view/widgets/user_list_item.dart';
+import 'package:chat_application/routes/app_routes.dart';
+import 'package:chat_application/values/app_text_style.dart';
 import 'package:chat_application/widgets/app_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../values/colors.dart';
+import '../../../values/strings.dart';
 
 class LandingScreen extends GetView<LandingController> {
   const LandingScreen({super.key});
@@ -10,7 +17,30 @@ class LandingScreen extends GetView<LandingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: AppColors.accent,
+        title: Text(
+          Strings.chat,
+          style: AppTextStyle.textBold.copyWith(
+            fontSize: 17.sp,
+            color: Colors.white,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Get.offAllNamed(
+                AppRoutes.login,
+              );
+            },
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           AppTextFormField(
