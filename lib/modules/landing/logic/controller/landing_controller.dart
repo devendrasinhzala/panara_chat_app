@@ -19,13 +19,14 @@ class LandingController extends GetxController {
           isEqualTo: email,
         )
         .get();
+    usersList.clear();
     usersList.add(User.fromJson(result.docs[0].data()));
     usersList.refresh();
   }
 
   //Chat Room Id
   String chatRoomId(String userId1, String userId2) {
-    if (userId1.toLowerCase().codeUnits[0] >
+    if (userId1[0].toLowerCase().codeUnits[0] >
         userId2.toLowerCase().codeUnits[0]) {
       return '$userId1$userId2';
     } else {

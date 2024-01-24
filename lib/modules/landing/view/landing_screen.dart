@@ -41,29 +41,39 @@ class LandingScreen extends GetView<LandingController> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          AppTextFormField(
-            onChanged: (value) {
-              if (value.isEmail) {
-                controller.searchUser(value);
-              }
-            },
-          ),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                itemCount: controller.usersList.length,
-                itemBuilder: (context, index) {
-                  return UserListItem(
-                    index: index,
-                    user: controller.usersList[index],
-                  );
-                },
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 36.w,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            20.h.verticalSpace,
+            const Text('Search user using mail id'),
+            AppTextFormField(
+              hintText: 'Enter email',
+              onChanged: (value) {
+                if (value.isEmail) {
+                  controller.searchUser(value);
+                }
+              },
+            ),
+            20.h.verticalSpace,
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.usersList.length,
+                  itemBuilder: (context, index) {
+                    return UserListItem(
+                      index: index,
+                      user: controller.usersList[index],
+                    );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
