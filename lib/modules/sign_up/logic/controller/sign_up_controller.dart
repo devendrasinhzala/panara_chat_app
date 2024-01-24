@@ -1,18 +1,20 @@
-import 'package:chat_application/routes/app_routes.dart';
-import 'package:chat_application/values/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+import '../../../../routes/app_routes.dart';
+import '../../../../values/strings.dart';
+
+class SignUpController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwodController = TextEditingController();
   RxBool hidePassword = true.obs;
+  RxBool hideConfirmPassword = true.obs;
 
-//Log In Method
-  Future<void> login() async {
+  //Sign Up Method
+  Future<void> signUp() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwodController.text,
       );

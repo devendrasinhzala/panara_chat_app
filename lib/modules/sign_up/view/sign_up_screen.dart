@@ -8,10 +8,10 @@ import '../../../values/colors.dart';
 import '../../../values/strings.dart';
 import '../../../widgets/app_text_form_field.dart';
 import '../../../widgets/common_button.dart';
-import '../logic/controller/login_controller.dart';
+import '../logic/controller/sign_up_controller.dart';
 
-class LoginScreen extends GetView<LoginController> {
-  LoginScreen({super.key});
+class SignUpScreen extends GetView<SignUpController> {
+  SignUpScreen({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
@@ -29,7 +29,7 @@ class LoginScreen extends GetView<LoginController> {
               ),
               children: [
                 Text(
-                  Strings.logIn,
+                  Strings.signUp,
                   textAlign: TextAlign.center,
                   style: AppTextStyle.textBold.copyWith(
                     fontSize: 28.sp,
@@ -86,12 +86,39 @@ class LoginScreen extends GetView<LoginController> {
                   ),
                 ),
                 20.h.verticalSpace,
-                //Log In Button
+                //Confirm Password Text Field
+                Obx(
+                  () => AppTextFormField(
+                    hintText: Strings.confirmPassword,
+                    obscureText: controller.hideConfirmPassword.value,
+                    validator: (value) {
+                      if (value?.isEmpty == true) {
+                        return 'Please enter confirm password';
+                      } else if (value != controller.passwodController.text) {
+                        return 'Password and confirm password not matching';
+                      }
+                      return null;
+                    },
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        controller.hideConfirmPassword.toggle();
+                      },
+                      icon: Icon(
+                        controller.hideConfirmPassword.value
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      color: AppColors.accent,
+                    ),
+                  ),
+                ),
+                20.h.verticalSpace,
+                //Sign Up Button
                 CommonButton(
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
                       FocusScope.of(context).unfocus();
-                      controller.login();
+                      controller.signUp();
                     }
                   },
                   backgroundColor: AppColors.accent,
@@ -99,7 +126,7 @@ class LoginScreen extends GetView<LoginController> {
                     vertical: 22.h,
                   ),
                   child: Text(
-                    Strings.logIn,
+                    Strings.signUp,
                     style: AppTextStyle.textBold.copyWith(
                       color: Colors.white,
                       fontSize: 17.sp,
@@ -107,12 +134,12 @@ class LoginScreen extends GetView<LoginController> {
                   ),
                 ),
                 38.h.verticalSpace,
-                //Don't Have Account Redirect To Sign Up Button
+                //Already Have Account Redirect To Login Button
                 InkWell(
                   onTap: () {
                     FocusScope.of(context).unfocus();
-                    Get.toNamed(
-                      AppRoutes.signUp,
+                    Get.offAllNamed(
+                      AppRoutes.login,
                     );
                   },
                   child: Row(
@@ -120,14 +147,14 @@ class LoginScreen extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        Strings.dontHaveAnAccount,
+                        Strings.alreadyHaveAnAccount,
                         style: AppTextStyle.textRegularSF.copyWith(
                           color: AppColors.primary65,
                           fontSize: 13.sp,
                         ),
                       ),
                       Text(
-                        Strings.signUp.toUpperCase(),
+                        Strings.logIn.toUpperCase(),
                         style: AppTextStyle.textBoldSF.copyWith(
                           color: AppColors.accent,
                           fontSize: 13.sp,
